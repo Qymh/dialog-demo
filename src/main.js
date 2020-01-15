@@ -1,8 +1,9 @@
-import Vue from "vue";
-import App from "./App.vue";
+import Vue from 'vue';
+import App from './App.vue';
+import QDialog from './components/QDialog';
 
-Vue.config.productionTip = false;
+Vue.prototype.$dialog = QDialog;
 
 new Vue({
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app');

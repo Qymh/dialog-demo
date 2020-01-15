@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Event {
+      constructor() {
+        this.events = Object.create(null);
+      }
+      on(type, fn) {
+        if (!this.events[type]) {
+          this.events[type] = fn;
+        } else {
+          this.events[type] = Array.isArray(this.events[type])
+            ? [...this.events[type], fn]
+            : [this.events[type], fn];
+        }
+      }
+      emit(type) {
+        if (!this.events[type]) {
+          return;
+        }
+        if (Array.isArray(this.events[type])) {
+          this.events[type].forEach(v => v());
+        } else {
+          this.events[type]();
+        }
+      }
+    }
+
+    const e = new Event()
+
+    e.on('test', () => {
+      console.log(1)
+    })
+
+    setTimeout(() => {
+      e.emit('test')
+    }, 1000);
+  </script>
+</body>
+
+</html>

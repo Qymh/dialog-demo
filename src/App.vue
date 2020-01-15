@@ -1,28 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <div id="app"></div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
-  name: "app",
-  components: {
-    HelloWorld
+  name: 'app',
+  created() {
+    this.$dialog
+      .show({
+        title: '实例弹窗',
+        details: '详情',
+        type: 'confirm'
+      })
+      .then(() => {})
+      .catch(() => {});
+
+    setTimeout(() => {
+      this.$dialog
+        .show({
+          title: '第二次实例弹窗',
+          details: '第二次详情'
+        })
+        .then(() => {})
+        .catch(() => {});
+    }, 2000);
   }
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
