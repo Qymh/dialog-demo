@@ -45,9 +45,12 @@ export default {
     // 构造btns
     generateBtnsTrans() {
       if (this.btns && this.btns.length) {
-        this.btnsTrans = this.btns.map(v => {
-          v.loading = false;
+        this.btns.forEach((v, i) => {
+          const bool =
+            (this.btnsTrans[i] && this.btnsTrans[i].loading) || false;
+          this.$set(v, 'loading', bool);
         });
+        this.btnsTrans = this.btns;
       } else if (this.type === 'alert') {
         this.btnsTrans = [
           {
